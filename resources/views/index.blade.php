@@ -17,6 +17,8 @@
                             @endforeach
                         </ul>
                     </div>
+                    <a href="{{ route('products.edit', ['product' => $product-> id]) }}" class="btn btn-primary">Edit</a>
+
                 </div>
             </a>
         @endforeach
