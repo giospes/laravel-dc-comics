@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    
     <div class="card-container h-100 overflow-auto">
-        
-        
-           
                 <div class="card">
                     <div class="card-header">
                         <h4>{{ $product->title}}</h4>

@@ -37,12 +37,9 @@ class ProductController extends Controller
     {
         $form_data = $request->all();
         $newProduct = new Product();
-        $newProduct ->title = $form_data['title'];
-        $newProduct ->descrition = $form_data['descrition'];
-        $newProduct ->quantity = $form_data['quantity'];
-        $newProduct ->price = $form_data['price'];
+        $newProduct ->fill($form_data);
         $newProduct->save();
-        return redirect()-> route('products.show', $newProduct->id);
+        return redirect()-> route('products.index')->with('message', "il prodotto: {{$newProduct->title}} è stato salvato");
     }
 
     /**
@@ -75,10 +72,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         $form_data = $request->all();
-        $product = Product::findOrFail($id);
+      
         $product -> update($form_data);
         return redirect() -> route('products.show', $product->id);
     }
@@ -89,8 +86,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products.index');
     }
 }

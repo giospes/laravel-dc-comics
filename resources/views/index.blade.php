@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    @if(session()->has('message'))
+        <div class="alert">
+            {{session()->get('message')}}
+        </div>
+    @endif
     <div class="card-container h-100 overflow-auto">
         @foreach($products as $index => $product)
             <a href="{{ route('products.show', ['product' => $product->id])}}">
@@ -18,9 +23,15 @@
                         </ul>
                     </div>
                     <a href="{{ route('products.edit', ['product' => $product-> id]) }}" class="btn btn-primary">Edit</a>
-
+                    <form action="{{ route('products.destroy', ['product' => $product-> id]) }}", method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-button btn btn-danger" data-item-title="{{$product->title}}">Delete</button>
+                    </form>
                 </div>
             </a>
         @endforeach
     </div>
+    @include('Partials.popupdelete');
+    
 @endsection

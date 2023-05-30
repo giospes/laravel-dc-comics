@@ -14,7 +14,7 @@
             <input type="text " class="form-control" id="descrition" name="descrition" aria-describedby="descritionHelp">
             <div id="descritionhelp" class="form-text">descrition</div>
         </div>
-        <div cl  ass="mb-3">
+        <div class="mb-3">
             <label for="price" class="form-label">Price</label>
             <input type="text " class="form-control" id="price" name="price" aria-describedby="priceHelp">
             <div id="pricehelp" class="form-text">price</div>
