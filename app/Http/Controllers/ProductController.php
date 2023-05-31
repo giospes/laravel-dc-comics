@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\UpdateProductRequest;
+
+
 class ProductController extends Controller
 {
     /**
@@ -79,16 +83,9 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $request -> validate([
-            'title' => 'required|max:255|min:2',
-            'descrition' => 'max:1000',
-            'quantity' => 'required|integer|digits_between: 0, 999',
-            'price' => 'required|numeric|min:0'
-
-        ]);
-        $form_data = $request->all();
+        $form_data = $request->validated();
       
         $product -> update($form_data);
         return redirect() -> route('products.show', $product->id);
@@ -105,4 +102,6 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->route('products.index');
     }
+
+
 }
